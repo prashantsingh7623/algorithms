@@ -1,6 +1,7 @@
 arr = [10,20,30,40,50,60,70,80,90]
 arr_rotated = [10,20,30,40,50,60,70,80,90,0,1,2,3,4,5,6]
 arr_rotated_2 = [3,1]
+arr_rotated_3 = [5,1,3]
 
 def binary_search_using_loop(arr: list, ele: int) -> bool:
   low = 0
@@ -73,7 +74,27 @@ def modified_binary_search_using_loop(arr: list, ele:int) -> bool:
     print('low: {}, high: {}, mid: {}'.format(low, high, (low + high)//2))
   return False
 
+def modified_binary_search_using_loop_medium(arr:list, ele:int) -> bool:
+  low = 0
+  high = len(arr)-1
+  while low <= high:
+    mid = (low + high)//2
+    if arr[mid] == ele:
+      return True
+    if ele < arr[mid]:
+      if ele >= arr[low] or arr[low] > arr[mid]:
+        high = mid - 1
+      else:
+        low = mid + 1
+    else:
+      if ele <= arr[high] or arr[high] < arr[mid]:
+        low = mid + 1
+      else:
+        high = mid-1
+  return False
+
 # print(binary_search(nums=arr,target=200,low=0,high=len(arr)-1))
 # print(binary_search_using_loop(arr=arr, ele=100))
 # print(modified_binary_search(nums=arr_rotated_2, target=1, low=0, high=len(arr_rotated_2)-1))
-print(modified_binary_search_using_loop(arr=arr_rotated_2, ele=1))
+# print(modified_binary_search_using_loop(arr=arr_rotated_2, ele=1))
+print(modified_binary_search_using_loop_medium(arr=arr_rotated_3, ele=5))
